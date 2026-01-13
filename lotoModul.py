@@ -83,13 +83,12 @@ class Game:
     __usercard = None
     __user2card = None
     __compcard = None
-    __game_regime = None
-    __game_level = None
+    __game_regime = ''
     __numkegs = 90
     __kegs = []
     __gameover = False
 
-    def __init__(self, game_regime=None, user_numbers=None):
+    def __init__(self, game_regime, user_numbers):
         self.__game_regime = game_regime
         self.__usercard = Card(user_numbers)
         self.__user2card = Card(user_numbers)
@@ -110,7 +109,7 @@ class Game:
         4 - user 2 wins
         """
         game_regime = self.__game_regime
-        if game_regime == '1':
+        if game_regime == 1:
             keg = self.__kegs.pop()
             print(f'Новый бочонок: {keg} (осталось {len(self.__kegs)})')
             print(f'----- Ваша карточка ------\n{self.__usercard}')
@@ -128,10 +127,10 @@ class Game:
                 self.__compcard.cross_num(keg)
                 if self.__compcard.closed():
                     return 2
-            print("DEBUG: дошёл до конца play_round")
+            #print("DEBUG: дошёл до конца play_round")
             return 9
 
-        elif game_regime == '2':
+        elif game_regime == 2:
             keg = self.__kegs.pop()
             print(f'Новый бочонок: {keg} (осталось {len(self.__kegs)})')
             print(f'----- Карточка 1 игрока ------\n{self.__usercard}')
@@ -153,5 +152,5 @@ class Game:
                 self.__user2card.cross_num(keg)
                 if self.__user2card.closed():
                     return 4
-            print("DEBUG: дошёл до конца play_round")
+            #print("DEBUG: дошёл до конца play_round")
             return 9
